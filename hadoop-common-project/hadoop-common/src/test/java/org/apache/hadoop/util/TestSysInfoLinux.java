@@ -522,4 +522,13 @@ public class TestSysInfoLinux {
     assertEquals(expectedNumSectorsWritten * diskSectorSize,
         plugin.getStorageBytesWritten());
   }
+  
+  @Test
+  public void testReadRealDiskBlockInformation() {
+	  SysInfoLinux info = new SysInfoLinux();
+	  
+	  assertEquals(info.readDiskBlockInformation("dm-0", 256), 512);
+	  // Test non-existent drive name
+	  assertEquals(info.readDiskBlockInformation("some-drive", 256), 256);
+  }
 }

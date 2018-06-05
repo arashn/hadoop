@@ -25,6 +25,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -475,6 +476,28 @@ public class TestStringUtils extends UnitTestcaseTimeLimit {
     executorService.shutdown();
     executorService.awaitTermination(50, TimeUnit.SECONDS);
   }
+  
+  @Test
+  public void testFormatTimeSortable() {
+	  long timeDiff = 523452311;
+	  String timeDiffStr = "99hrs, 59mins, 59sec";
+	  
+	  assertEquals(StringUtils.formatTimeSortable(timeDiff), timeDiffStr);
+  }
+  
+  @Test
+  public void testIsAlpha() {
+	  assertTrue(StringUtils.isAlpha("hello"));
+	  assertFalse(StringUtils.isAlpha("hello1"));
+  }
+  
+  /*@Test
+  public void testEscapeHTML() {
+	  String htmlStr = "<p>Hello. How are you?</p>";
+	  String escapedStr = "&lt;p&gt;Hello. How are you?&lt;/p&gt;";
+	  
+	  assertEquals(StringUtils.escapeHTML(htmlStr), escapedStr);
+  }*/
 
   // Benchmark for StringUtils split
   public static void main(String []args) {

@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.io.PrintWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
@@ -527,5 +528,10 @@ public class TestShell extends Assert {
   @Test
   public void testIsJavaVersionAtLeast() {
     assertTrue(Shell.isJavaVersionAtLeast(8));
+  }
+  
+  @Test
+  public void testIsBashSupported() throws InterruptedIOException {
+	  assertTrue(Shell.checkIsBashSupported());
   }
 }
