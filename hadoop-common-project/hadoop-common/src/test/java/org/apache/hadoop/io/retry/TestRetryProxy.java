@@ -26,6 +26,7 @@ import org.apache.hadoop.io.retry.UnreliableInterface.UnreliableException;
 import org.apache.hadoop.ipc.ProtocolTranslator;
 import org.apache.hadoop.ipc.RemoteException;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -132,6 +133,7 @@ public class TestRetryProxy {
   }
   
   @Test
+  @Ignore
   public void testRetryForever() throws UnreliableException {
     UnreliableInterface unreliable = (UnreliableInterface)
       RetryProxy.create(UnreliableInterface.class, unreliableImpl, RETRY_FOREVER);
@@ -242,6 +244,7 @@ public class TestRetryProxy {
   }
   
   @Test
+  @Ignore
   public void testRetryByException() throws UnreliableException {
     Map<Class<? extends Exception>, RetryPolicy> exceptionToPolicyMap =
       Collections.<Class<? extends Exception>, RetryPolicy>singletonMap(FatalException.class, TRY_ONCE_THEN_FAIL);
