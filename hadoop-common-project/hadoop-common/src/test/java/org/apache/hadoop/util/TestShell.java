@@ -39,6 +39,8 @@ import org.apache.hadoop.fs.FileUtil;
 import org.apache.hadoop.test.GenericTestUtils;
 
 import static org.apache.hadoop.util.Shell.*;
+import static org.junit.Assume.assumeTrue;
+
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
@@ -532,6 +534,6 @@ public class TestShell extends Assert {
   
   @Test
   public void testIsBashSupported() throws InterruptedIOException {
-	  assertTrue(Shell.checkIsBashSupported());
+    assumeTrue("Bash is not supported", Shell.checkIsBashSupported());
   }
 }

@@ -479,25 +479,25 @@ public class TestStringUtils extends UnitTestcaseTimeLimit {
   
   @Test
   public void testFormatTimeSortable() {
-	  long timeDiff = 523452311;
-	  String timeDiffStr = "99hrs, 59mins, 59sec";
-	  
-	  assertEquals(StringUtils.formatTimeSortable(timeDiff), timeDiffStr);
+    long timeDiff = 523452311;
+    String timeDiffStr = "99hrs, 59mins, 59sec";
+    
+    assertEquals("Incorrect time diff string returned", timeDiffStr, StringUtils.formatTimeSortable(timeDiff));
   }
   
   @Test
   public void testIsAlpha() {
-	  assertTrue(StringUtils.isAlpha("hello"));
-	  assertFalse(StringUtils.isAlpha("hello1"));
+    assertTrue("Reported hello as non-alpha string", StringUtils.isAlpha("hello"));
+    assertFalse("Reported hello1 as alpha string", StringUtils.isAlpha("hello1"));
   }
   
-  /*@Test
+  @Test
   public void testEscapeHTML() {
-	  String htmlStr = "<p>Hello. How are you?</p>";
-	  String escapedStr = "&lt;p&gt;Hello. How are you?&lt;/p&gt;";
-	  
-	  assertEquals(StringUtils.escapeHTML(htmlStr), escapedStr);
-  }*/
+    String htmlStr = "<p>Hello. How are you?</p>";
+    String escapedStr = "&lt;p&gt;Hello. How are you?&lt;/p&gt;";
+    
+    assertEquals("Incorrect escaped HTML string returned", escapedStr, StringUtils.escapeHTML(htmlStr));
+  }
 
   // Benchmark for StringUtils split
   public static void main(String []args) {
