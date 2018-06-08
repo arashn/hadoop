@@ -53,8 +53,6 @@ import org.apache.hadoop.ozone.container.common.interfaces
 import org.apache.hadoop.ozone.container.common.interfaces
     .ContainerLocationManager;
 import org.apache.hadoop.ozone.container.common.interfaces.ContainerManager;
-import org.apache.hadoop.ozone.container.common.interfaces
-    .ContainerReportManager;
 import org.apache.hadoop.ozone.container.common.interfaces.KeyManager;
 import org.apache.hadoop.util.ReflectionUtils;
 import org.apache.hadoop.utils.MetadataKeyFilters;
@@ -127,10 +125,8 @@ public class ContainerManagerImpl implements ContainerManager {
   private ChunkManager chunkManager;
   private KeyManager keyManager;
   private Configuration conf;
-  private DatanodeDetails datanodeDetails;
 
   private ContainerDeletionChoosingPolicy containerDeletionChooser;
-  private ContainerReportManager containerReportManager;
 
   /**
    * Init call that sets up a container Manager.
@@ -154,7 +150,6 @@ public class ContainerManagerImpl implements ContainerManager {
         " directories must be greater than zero.");
 
     this.conf = config;
-    this.datanodeDetails = dnDetails;
 
     readLock();
     try {
@@ -203,9 +198,6 @@ public class ContainerManagerImpl implements ContainerManager {
       }
       this.locationManager =
           new ContainerLocationManagerImpl(containerDirs, dataDirs, config);
-
-      this.containerReportManager =
-          new ContainerReportManagerImpl(config);
     } finally {
       readUnlock();
     }
@@ -314,7 +306,8 @@ public class ContainerManagerImpl implements ContainerManager {
     writeLock();
     try {
       if (containerMap.containsKey(containerData.getContainerID())) {
-        LOG.debug("container already exists. {}", containerData.getContainerID());
+        LOG.debug("container already exists. {}",
+            containerData.getContainerID());
         throw new StorageContainerException("container already exists.",
             CONTAINER_EXISTS);
       }
@@ -595,7 +588,8 @@ public class ContainerManagerImpl implements ContainerManager {
   @Override
   public void updateContainer(long containerID, ContainerData data,
       boolean forceUpdate) throws StorageContainerException {
-    Preconditions.checkState(containerID >= 0, "Container ID cannot be negative.");
+    Preconditions.checkState(containerID >= 0,
+        "Container ID cannot be negative.");
     Preconditions.checkNotNull(data, "Container data cannot be null");
     FileOutputStream containerStream = null;
     DigestOutputStream dos = null;
@@ -711,7 +705,7 @@ public class ContainerManagerImpl implements ContainerManager {
   }
 
   /**
-   * Returns LifeCycle State of the container
+   * Returns LifeCycle State of the container.
    * @param containerID - Id of the container
    * @return LifeCycle State of the container
    * @throws StorageContainerException
