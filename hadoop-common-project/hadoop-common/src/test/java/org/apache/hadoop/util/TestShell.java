@@ -531,7 +531,7 @@ public class TestShell extends Assert {
   public void testIsJavaVersionAtLeast() {
     assertTrue(Shell.isJavaVersionAtLeast(8));
   }
-  
+
   @Test
   public void testIsBashSupported() throws InterruptedIOException {
     assumeTrue("Bash is not supported", Shell.checkIsBashSupported());
